@@ -5,7 +5,7 @@ This is a POC of iCommerce backend services.
 # Project overview
 ### Components
 - API GW - Netflix Zuul
-- Discovery Server - Netfix Eureka
+- Discovery Server - Netflix Eureka
 - Product Service
 - Audit Service
 
@@ -30,7 +30,7 @@ $ git clone https://github.com/hungcq83/iCommerce.git
 $ cd iCommerce
 $ ./run_all.ssh
 ```
-Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test:
+Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman).
 
 ### Audit API
 Create Audit
@@ -97,7 +97,7 @@ curl -X PUT \
 Get Product Revision By ID
 ```sh
 curl -X GET \
-  http://localhost:8090/api/products/4/revision/2 \
+  http://localhost:8090/api/products/4/revision/1 \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: d9f24b4d-d7ab-47d1-8dbe-3f936bbecddb'
 ```
