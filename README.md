@@ -30,7 +30,7 @@ $ git clone https://github.com/hungcq83/iCommerce.git
 $ cd iCommerce
 $ ./run_all.ssh
 ```
-Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test:
+Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman).
 
 ### Audit API
 Create Audit
