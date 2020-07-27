@@ -1,6 +1,6 @@
 # iCommerce
 
-This is a POC of iCommerce backend services. 
+This is a POC of iCommerce backend services. ERD files and Architecture Diagram can be found in project root.
 
 # Project overview
 ### Components
