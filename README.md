@@ -64,13 +64,6 @@ curl -X GET \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: 426ab814-edc6-4cb0-8b81-5d96407afb67'
 ```
-Get Product Revision By ID
-```sh
-curl -X GET \
-  http://localhost:8090/api/products/4/revision/2 \
-  -H 'Cache-Control: no-cache' \
-  -H 'Postman-Token: d9f24b4d-d7ab-47d1-8dbe-3f936bbecddb'
-```
 Search Products by filters
 ```sh
 curl -X GET \
@@ -100,6 +93,13 @@ curl -X PUT \
 	"brand": "Test Brand",
 	"color": "Red"
 }'
+```
+Get Product Revision By ID
+```sh
+curl -X GET \
+  http://localhost:8090/api/products/4/revision/2 \
+  -H 'Cache-Control: no-cache' \
+  -H 'Postman-Token: d9f24b4d-d7ab-47d1-8dbe-3f936bbecddb'
 ```
 Create Product
 ```sh
