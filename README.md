@@ -97,7 +97,7 @@ curl -X PUT \
 Get Product Revision By ID
 ```sh
 curl -X GET \
-  http://localhost:8090/api/products/4/revision/2 \
+  http://localhost:8090/api/products/4/revision/1 \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: d9f24b4d-d7ab-47d1-8dbe-3f936bbecddb'
 ```
