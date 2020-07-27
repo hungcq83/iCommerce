@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "e1dc45aa-4dcc-4fc1-9728-82838df1cbb9",
+		"name": "ECommerce APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Audit API - Create Audit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"productCode\": \"abc4\",\n\t\"activity\": \"Search\",\n\t\"query\": \"macbook\",\n\t\"filter\": \"color:red\",\n\t\"sortBy\": \"price\",\n\t\"order\": \"asc\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/audits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"audits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Audit API - Get Audit By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/audits/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"audits",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Get product revision by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/products/4/revision/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products",
+						"4",
+						"revision",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Get Product By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/products/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Search Products with filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/products?q=mac&sortBy=price&order=asc&filter=brand:apple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "mac"
+						},
+						{
+							"key": "sortBy",
+							"value": "price"
+						},
+						{
+							"key": "order",
+							"value": "asc"
+						},
+						{
+							"key": "filter",
+							"value": "brand:apple"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Search Products without filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/products?q=a&sortBy=color&order=desc&page=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "a"
+						},
+						{
+							"key": "sortBy",
+							"value": "color"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Create Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"test\",\n\t\"code\": \"TEST1\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Update product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n\t\"name\": \"testNew2\",\n\t\"code\": \"TESTNEW2\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
