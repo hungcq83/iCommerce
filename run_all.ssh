@@ -1,0 +1,8 @@
+mvn clean install -Dmaven.test.skip=true
+java -jar eureka-server/target/eureka-server-0.0.1-SNAPSHOT.jar &
+sleep 20s
+java -jar audit/target/audit-0.0.1-SNAPSHOT.jar &
+sleep 20s
+java -jar product/target/product-0.0.1-SNAPSHOT.jar &
+sleep 20s
+java -jar zuul/target/zuul-0.0.1-SNAPSHOT.jar &
