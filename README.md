@@ -5,7 +5,7 @@ This is a POC of iCommerce backend services.
 # Project overview
 ### Components
 - API GW - Netflix Zuul
-- Discovery Server - Netfix Eureka
+- Discovery Server - Netflix Eureka
 - Product Service
 - Audit Service
 
