@@ -64,7 +64,7 @@ curl -X GET \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: 426ab814-edc6-4cb0-8b81-5d96407afb67'
 ```
-Search Products by filters
+Search Products with filters
 ```sh
 curl -X GET \
   'http://localhost:8090/api/products?q=mac&sortBy=price&order=asc&filter=brand:apple' \
