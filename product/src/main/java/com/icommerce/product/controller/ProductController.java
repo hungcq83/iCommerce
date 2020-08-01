@@ -1,7 +1,8 @@
 package com.icommerce.product.controller;
 
 import com.icommerce.product.model.request.ProductDTO;
-import com.icommerce.product.model.response.ProductResponseDTO;
+import com.icommerce.product.model.request.SkuDTO;
+import com.icommerce.product.model.response.GenericResponseDTO;
 import com.icommerce.product.service.ProductService;
 
 import com.icommerce.product.validation.Extended;
@@ -30,21 +31,21 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/{id}/revision/{revisionId}")
-    public ResponseEntity<ProductDTO> getProductByRevision(@NotNull @Min(1) @PathVariable("id") Long id,
-                                                           @NotNull @Min(1) @PathVariable("revisionId") Integer revisionId) {
-
-        ProductDTO productDTO = productService.getProductByRevision(id, revisionId);
-
-        if (productDTO != null) {
-            log.info("Found revision: {} for product ID: {}", revisionId, id);
-            return ResponseEntity.ok(productDTO);
-        }
-
-        log.info("Could not find revision: {} for product ID: {}", revisionId, id);
-        return ResponseEntity.noContent().build();
-
-    }
+//    @GetMapping("/skus/{id}/revision/{revisionId}")
+//    public ResponseEntity<SkuDTO> getSkuByRevision(@NotNull @Min(1) @PathVariable("id") Long id,
+//                                                           @NotNull @Min(1) @PathVariable("revisionId") Integer revisionId) {
+//
+//        SkuDTO skuDTO = productService.getSkuByRevision(id, revisionId);
+//
+//        if (skuDTO != null) {
+//            log.info("Found revision: {} for sku ID: {}", revisionId, id);
+//            return ResponseEntity.ok(skuDTO);
+//        }
+//
+//        log.info("Could not find revision: {} for sku ID: {}", revisionId, id);
+//        return ResponseEntity.noContent().build();
+//
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> viewProduct(@NotNull @Min(1) @PathVariable("id") Long id) {
@@ -61,15 +62,19 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> findProducts(@RequestParam(name="q")  String query,
+    public ResponseEntity<List<ProductDTO>> findProducts(@RequestParam(name="q" ,required = false)  String query,
                                                   @RequestParam(required = false) String filter,
                                                   @RequestParam(required = false) String sortBy,
                                                   @RequestParam(required = false) String order,
-                                                  @RequestParam(required = false) Integer page) {
+                                                  @RequestParam(required = false) Integer page,
+                                                  @RequestParam(required = false) String category) {
 
         List<ProductDTO> products = new ArrayList<>();
 
-        if (StringUtils.isNotBlank(query)) {
+        if (StringUtils.isNoneBlank(category)) {
+            products = productService.findProductsByCategoryCode(category);
+        }
+        else if (StringUtils.isNotBlank(query)) {
             products = productService.findProducts(query, filter, sortBy, order, page);
         }
 
@@ -77,16 +82,24 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<GenericResponseDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         long productId = productService.createProduct(productDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ProductResponseDTO(productId));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new GenericResponseDTO(productId));
+    }
+
+    @PutMapping("/skus")
+    public ResponseEntity<Object> updateSku(@Valid @RequestBody SkuDTO skuDTO) {
+        productService.updateSku(skuDTO);
+
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
     @Validated(Extended.class)
     public ResponseEntity<Object> updateProduct(@Valid @RequestBody ProductDTO productDTO) {
         long productId = productService.updateProduct(productDTO);
-        return ResponseEntity.ok(new ProductResponseDTO(productId));
+        return ResponseEntity.ok(new GenericResponseDTO(productId));
     }
+
 }

@@ -1,8 +1,11 @@
 package com.icommerce.product.service;
 
 import com.icommerce.product.entity.ProductEntity;
+import com.icommerce.product.entity.SkuEntity;
 import com.icommerce.product.model.request.ProductDTO;
+import com.icommerce.product.model.request.SkuDTO;
 import com.icommerce.product.repository.ProductRepository;
+import com.icommerce.product.repository.SkuRepository;
 import com.icommerce.product.specification.ProductSpecifications;
 import com.netflix.discovery.converters.Auto;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +40,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private SkuRepository skuRepository;
 
     @Autowired
     private AuditService auditService;
@@ -96,6 +102,12 @@ public class ProductService {
         return productDTOs;
     }
 
+    public List<ProductDTO> findProductsByCategoryCode(String categoryCode) {
+        return productRepository.findByCategoryCodeIgnoreCase(categoryCode).stream()
+                .map(product -> mapper.map(product, ProductDTO.class))
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public long updateProduct(ProductDTO productDTO) {
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
@@ -105,21 +117,29 @@ public class ProductService {
         return productEntity.getId();
     }
 
-    public ProductDTO getProductByRevision(long productId, int revision) {
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+    @Transactional
+    public void updateSku(SkuDTO skuDTO) {
+        SkuEntity skuEntity = mapper.map(skuDTO, SkuEntity.class);
+        skuRepository.save(skuEntity);
 
-        List<ProductEntity> productEntities = auditReader.createQuery()
-                .forRevisionsOfEntity(ProductEntity.class, true, true)
-                .add(AuditEntity.id().eq(productId))
-                .getResultList();
-
-        if (productEntities.size() >= revision) {
-            ProductEntity entity = productEntities.get(revision-1);
-            return mapper.map(entity, ProductDTO.class);
-        }
-
-        return null;
+        log.info("Successfully save/update sku");
     }
+
+//    public SkuDTO getSkuByRevision(long productId, int revision) {
+//        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+//
+//        List<SkuEntity> skuEntities = auditReader.createQuery()
+//                .forRevisionsOfEntity(SkuEntity.class, true, true)
+//                .add(AuditEntity.id().eq(productId))
+//                .getResultList();
+//
+//        if (skuEntities.size() >= revision) {
+//            SkuEntity entity = skuEntities.get(revision-1);
+//            return mapper.map(entity, SkuDTO.class);
+//        }
+//
+//        return null;
+//    }
 
     private Pageable getSortingAndPaging(String sortBy, String order, Integer page) {
         Pageable pageable = PageRequest.of(page != null ? page : 0, pageSize,

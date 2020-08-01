@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ProductResponseDTO {
+public class GenericResponseDTO {
 
     private Long id;
 

@@ -60,46 +60,23 @@ curl -X GET \
 Get Product by ID
 ```sh
 curl -X GET \
-  http://localhost:8090/api/products/4 \
+  http://localhost:8090/api/products/1 \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: 426ab814-edc6-4cb0-8b81-5d96407afb67'
 ```
 Search Products with filters
 ```sh
 curl -X GET \
-  'http://localhost:8090/api/products?q=mac&sortBy=price&order=asc&filter=brand:apple' \
+  'http://localhost:8090/api/products?q=a&sortBy=category.name&order=desc&filter=brand:apple' \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: 64775f49-e7f8-47c7-99e3-ef4a47517509'
 ```
 Search Products without filters
 ```sh
 curl -X GET \
-  'http://localhost:8090/api/products?q=a&sortBy=color&order=desc&page=0' \
+  'http://localhost:8090/api/products?q=a&sortBy=code&order=desc&page=0' \
   -H 'Cache-Control: no-cache' \
   -H 'Postman-Token: 5b691596-5142-44c8-b464-b069c06300dd'
-```
-Update Product
-```sh
-curl -X PUT \
-  http://localhost:8090/api/products \
-  -H 'Cache-Control: no-cache' \
-  -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 85bd3ccf-59e7-4d17-8beb-2d0e88e4ae7e' \
-  -d '{
-	"id": 4,
-	"name": "testNew3",
-	"code": "TESTNEW3",
-	"price": 12.90,
-	"brand": "Test Brand",
-	"color": "Red"
-}'
-```
-Get Product Revision By ID
-```sh
-curl -X GET \
-  http://localhost:8090/api/products/4/revision/1 \
-  -H 'Cache-Control: no-cache' \
-  -H 'Postman-Token: d9f24b4d-d7ab-47d1-8dbe-3f936bbecddb'
 ```
 Create Product
 ```sh
@@ -107,12 +84,38 @@ curl -X POST \
   http://localhost:8090/api/products \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 34eee7ae-5e22-41c7-b9f1-7fec9a1f7861' \
+  -H 'Postman-Token: cc3f8bc1-25d1-4a67-bcd5-28e229129061' \
   -d '{
 	"name": "test",
 	"code": "TEST1",
 	"price": 12.90,
 	"brand": "Test Brand",
-	"color": "Red"
+	"color": "Red",
+	"categoryId": 2
 }'
 ```
+Update Product
+```sh
+curl -X PUT \
+  http://localhost:8090/api/products \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 5a8b6542-c333-417c-927d-67f1683d88e5' \
+  -d '{
+	"id": 5,
+	"name": "testNew3",
+	"code": "TESTNEW3",
+	"price": 12.90,
+	"brand": "Test Brand",
+	"color": "Red",
+	"categoryId": 1
+}'
+```
+Get Products by category code
+```sh
+curl -X GET \
+  'http://localhost:8090/api/products?category=laptop' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Postman-Token: afe60449-7d26-478d-97aa-33ac02877670'
+```
+

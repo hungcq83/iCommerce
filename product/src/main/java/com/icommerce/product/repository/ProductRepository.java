@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long>, JpaSpecificationExecutor<ProductEntity> {
 
-//    List<ProductEntity> findByNameIgnoreCaseContaining(String query);
-//    List<ProductEntity> findAllWithSorting(Specification<ProductEntity> specification, Pageable pageable);
+    List<ProductEntity> findByCategoryCodeIgnoreCase(String categoryCode);
 }
