@@ -5,7 +5,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 - [Architecture design](#architecture-design)
   * [Frontend](#frontend)
   * [Backend](#backend)
-  * [Authentication & Authorization](#authentication-&-authorization)
+  * [Authentication & Authorization](#authentication-and-authorization)
 - [Project overview](#project-overview)
   * [Components](#components)
   * [Notable dependencies](#notable-dependencies)
@@ -23,7 +23,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 - An API GW that acts as a single entry point for all requests from Frontend. API GW responsible for authenticate/authorize the requests before routing them to corresponding microservices.
 - Service Discovery - for service register and discovery, provides an abstract way for service-to-service communication
 - A set of microservices: Product, Audit, Cart and Order. Cart and Order services not yet implemented. 
-### Authentication & Authorization
+### Authentication and Authorization
 - OAuth2 Authorization Server (not yet implemented) - Centralized Authorization server to validate users credentials, generate & validate access token
 - User authentication & authorization: Use OAuth2 Authorization Code flow with PKCE for enhanced security since our Frontend is SPA. Traditional webapp can use Authorization Code flow (without PCKE).
 - API GW --> microservices: Use OAuth2 Client Credentials flow for system-to-system authentication. If microservices are deployed to a private network which only API GW has access to, then this authentication may not be required.
