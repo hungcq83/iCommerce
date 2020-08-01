@@ -2,14 +2,42 @@
 
 This is a POC of iCommerce backend services. ERD files and Architecture Diagram can be found in project root. Due to time constraint, only 1 unit test was written for the Product service as an example. 
 
-# Project overview
-### Components
-- API GW - Netflix Zuul
-- Discovery Server - Netflix Eureka
-- Product Service
-- Audit Service
+- [Architecture design](#architecture-design)
+  * [Frontend](#frontend)
+  * [Backend](#backend)
+  * [Authentication & Authorization](#authentication-and-authorization)
+- [Project overview](#project-overview)
+  * [Components](#components)
+  * [Notable dependencies](#notable-dependencies)
+- [Installation guide](#installation-guide)
+  * [Pre-requisites](#pre-requisites)
+  * [Steps to run](#Steps-to-run)
+- [APIs](#apis)
+  * [Audit API](#audit-api)
+  * [Product API](#product-api)
 
-### Notable Dependencies
+## Architecture design
+![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/iCommerce%20-%20ArchitectureDiagram.png)
+### Frontend
+- Single Page Application built using ReactJs/AngularJs
+### Backend
+- An API GW that acts as a single entry point for all requests from Frontend. API GW responsible for authenticate/authorize the requests before routing them to corresponding microservices.
+- Service Discovery - for service register and discovery, provides an abstract way for service-to-service communication
+- A set of microservices: Product, Audit, Cart and Order. Cart and Order services not yet implemented. 
+### Authentication and Authorization
+- OAuth2 Authorization Server (not yet implemented) - Centralized Authorization server to validate users credentials, generate & validate access token
+- User authentication & authorization: Use OAuth2 Authorization Code flow with PKCE for enhanced security since our Frontend is SPA. Traditional webapp can use Authorization Code flow (without PCKE).
+- API GW --> microservices: Use OAuth2 Client Credentials flow for system-to-system authentication. If microservices are deployed to a private network which only API GW has access to, then this authentication may not be required.
+> All components should be deployed to Cloud platform(s) to utilize High Availability/Auto Scaling cloud features.
+
+## Project overview
+### Components
+- API GW - Netflix Zuul (can be upgraded to Spring Cloud Gateway)
+- Discovery Server - Netflix Eureka
+- Product Service (supports Get, Search, Sort, Filter, Pagination, Create and Update)
+- Audit Service (supports Get & Create)
+
+### Notable dependencies
 - Lombok - avoid repetitive code
 - Hibernate Envers - entity versioning
 - OpenFeign - Declarative REST Client
@@ -18,7 +46,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 - Hystrix - Circuit Breaker
 - Spring Data JPA - Data access abstraction
 
-# Installation guide
+## Installation guide
 ### Pre-requisites
 - Maven
 - Java 8
@@ -32,6 +60,7 @@ $ ./run_all.ssh
 ```
 Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman).
 
+## APIs
 ### Audit API
 Create Audit
 ```sh
