@@ -17,6 +17,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
   * [Product API](#product-api)
 
 ## Architecture design
+![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/iCommerce%20-%20ArchitectureDiagram.png)
 ### Frontend
 - Single Page Application built using ReactJs/AngularJs
 ### Backend
