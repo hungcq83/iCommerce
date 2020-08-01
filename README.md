@@ -2,14 +2,24 @@
 
 This is a POC of iCommerce backend services. ERD files and Architecture Diagram can be found in project root. Due to time constraint, only 1 unit test was written for the Product service as an example. 
 
-# Project overview
+- [Project overview](#project-overview)
+  * [Components](#components)
+  * [Notable dependencies](#notable-dependencies)
+- [Installation guide](#installation-guide)
+  * [Pre-requisites](#pre-requisites)
+  * [Steps to run](#Steps-to-run)
+- [APIs](#apis)
+  * [Audit API](#audit-api)
+
+
+## Project overview
 ### Components
 - API GW - Netflix Zuul
 - Discovery Server - Netflix Eureka
 - Product Service
 - Audit Service
 
-### Notable Dependencies
+### Notable dependencies
 - Lombok - avoid repetitive code
 - Hibernate Envers - entity versioning
 - OpenFeign - Declarative REST Client
@@ -18,7 +28,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 - Hystrix - Circuit Breaker
 - Spring Data JPA - Data access abstraction
 
-# Installation guide
+## Installation guide
 ### Pre-requisites
 - Maven
 - Java 8
@@ -32,6 +42,7 @@ $ ./run_all.ssh
 ```
 Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman).
 
+## APIs
 ### Audit API
 Create Audit
 ```sh
