@@ -57,37 +57,13 @@
 			"response": []
 		},
 		{
-			"name": "Product API - Get product revision by ID",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8090/api/products/4/revision/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api",
-						"products",
-						"4",
-						"revision",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Product API - Get Product By ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/api/products/4",
+					"raw": "http://localhost:8090/api/products/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -96,7 +72,7 @@
 					"path": [
 						"api",
 						"products",
-						"4"
+						"1"
 					]
 				}
 			},
@@ -109,7 +85,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/api/products?q=mac&sortBy=price&order=asc&filter=brand:apple",
+					"raw": "http://localhost:8090/api/products?q=a&sortBy=category.name&order=desc&filter=brand:apple",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -122,15 +98,15 @@
 					"query": [
 						{
 							"key": "q",
-							"value": "mac"
+							"value": "a"
 						},
 						{
 							"key": "sortBy",
-							"value": "price"
+							"value": "category.name"
 						},
 						{
 							"key": "order",
-							"value": "asc"
+							"value": "desc"
 						},
 						{
 							"key": "filter",
@@ -148,7 +124,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/api/products?q=a&sortBy=color&order=desc&page=0",
+					"raw": "http://localhost:8090/api/products?q=a&sortBy=code&order=desc&page=0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -165,7 +141,7 @@
 						},
 						{
 							"key": "sortBy",
-							"value": "color"
+							"value": "code"
 						},
 						{
 							"key": "order",
@@ -192,7 +168,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"test\",\n\t\"code\": \"TEST1\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\"\n}"
+					"raw": "{\n\t\"name\": \"test\",\n\t\"code\": \"TEST1\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\",\n\t\"categoryId\": 2\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8090/api/products",
@@ -221,7 +197,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\": 5,\n\t\"name\": \"testNew2\",\n\t\"code\": \"TESTNEW2\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\"\n}"
+					"raw": "{\n\t\"id\": 5,\n\t\"name\": \"testNew3\",\n\t\"code\": \"TESTNEW3\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\",\n\t\"categoryId\": 1\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8090/api/products",
@@ -233,6 +209,33 @@
 					"path": [
 						"api",
 						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product API - Get products by category code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/products?category=laptop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "laptop"
+						}
 					]
 				}
 			},
