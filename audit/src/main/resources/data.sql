@@ -7,7 +7,7 @@ CREATE TABLE audit (
   query VARCHAR(50) DEFAULT NULL,
   filter VARCHAR(50) DEFAULT NULL,
   sort_by VARCHAR(50) DEFAULT NULL,
-  sort_order VARCHAR(3) DEFAULT 'asc',
+  sort_order VARCHAR(4) DEFAULT 'asc',
   page SMALLINT DEFAULT 0,
   time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
