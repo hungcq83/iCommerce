@@ -55,6 +55,7 @@ Audit DB
 - Model Mapper - mapping from DTO to Entity and vice versa
 - Hystrix - Circuit Breaker
 - Spring Data JPA - Data access abstraction
+- Spring Cloud Sleuth - Distributed tracing
 
 ## Installation guide
 ### Pre-requisites
