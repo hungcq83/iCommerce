@@ -6,6 +6,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
   * [Frontend](#frontend)
   * [Backend](#backend)
   * [Authentication & Authorization](#authentication-and-authorization)
+  * [Entity relationship diagram](#entity-relationship-diagram)
 - [Project overview](#project-overview)
   * [Components](#components)
   * [Notable dependencies](#notable-dependencies)
@@ -29,6 +30,15 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 - User authentication & authorization: Use OAuth2 Authorization Code flow with PKCE for enhanced security since our Frontend is SPA. Traditional webapp can use Authorization Code flow (without PCKE).
 - API GW --> microservices: Use OAuth2 Client Credentials flow for system-to-system authentication. If microservices are deployed to a private network which only API GW has access to, then this authentication may not be required.
 > All components should be deployed to Cloud platform(s) to utilize High Availability/Auto Scaling cloud features.
+### Entity relationship diagram
+
+Product DB
+
+![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/Product%20ERD.png)
+
+Audit DB
+
+![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/Audit%20ERD.png)
 
 ## Project overview
 ### Components
