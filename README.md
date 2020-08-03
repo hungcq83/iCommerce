@@ -36,6 +36,10 @@ Product DB
 
 ![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/Product%20ERD.png)
 
+Order DB
+
+![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/Order%20ERD.png)
+
 Audit DB
 
 ![alt text](https://raw.githubusercontent.com/hungcq83/iCommerce/master/Audit%20ERD.png)
