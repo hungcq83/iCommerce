@@ -74,7 +74,7 @@ $ git clone https://github.com/hungcq83/iCommerce.git
 $ cd iCommerce
 $ ./run_all.ssh
 ```
-Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman).
+Wait a few minutes for all 4 apps to start up. Once all apps are up running, use below command lines to test (you can also use the Postman collection in this project to test using Postman). Service discovery will take about <mark>1-2 mins<mark> to register/discover all the services.
 
 ## APIs
 ### Audit API
