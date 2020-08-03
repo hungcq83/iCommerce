@@ -6,21 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "supplier")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-public class ProductEntity {
+public class SupplierEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,19 +30,17 @@ public class ProductEntity {
     @Column(name="code")
     private String code;
 
-    @Column(name="brand")
-    private String brand;
+    @Column(name="address")
+    private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private CategoryEntity category;
+    @Column(name="email")
+    private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
-    private SupplierEntity supplier;
+    @Column(name="phone_number")
+    private String phoneNumber;
 
-    @OneToMany(mappedBy = "product")
-    private List<SkuEntity> skus;
+    @OneToMany(mappedBy = "supplier")
+    private List<ProductEntity> products;
 
     @Column(name="modified_date")
     @Transient

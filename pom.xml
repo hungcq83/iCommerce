@@ -14,5 +14,6 @@
         <module>eureka-server</module>
         <module>product</module>
         <module>zuul</module>
+        <module>order</module>
     </modules>
 </project>

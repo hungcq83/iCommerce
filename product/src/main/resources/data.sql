@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS sku;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS supplier;
 DROP TABLE IF EXISTS product_category;
 
 CREATE TABLE product_category (
@@ -9,14 +10,26 @@ CREATE TABLE product_category (
   modified_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE supplier (
+  id LONG AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(50) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  address VARCHAR(250) NOT NULL,
+  phone_number VARCHAR(20) NOT NULL,
+  modified_date DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE product (
   id LONG AUTO_INCREMENT PRIMARY KEY,
   code VARCHAR(50) NOT NULL,
   name VARCHAR(250) NOT NULL,
   brand VARCHAR(250) NOT NULL,
   category_id LONG NOT NULL,
+  supplier_id LONG NOT NULL,
   modified_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (category_id) REFERENCES product_category(id)
+  FOREIGN KEY (category_id) REFERENCES product_category(id),
+  FOREIGN KEY (supplier_id) REFERENCES supplier(id)
 );
 
 CREATE TABLE sku (
@@ -31,18 +44,22 @@ CREATE TABLE sku (
 
 INSERT INTO product_category (id, name, code) VALUES
 (1, 'Laptop', 'LAPTOP');
-
 INSERT INTO product_category (id, name, code) VALUES
 (2, 'Tablet', 'TABLET');
 
-INSERT INTO product (name, code, brand, category_id) VALUES
-  ('MacBook Pro 2020', 'MACPRO2020', 'Apple', 1);
-INSERT INTO product (name, code, brand, category_id) VALUES
-  ('MacBook Air 2018', 'MACAIR2018', 'Apple', 1);
-INSERT INTO product (name, code, brand, category_id) VALUES
-  ('iPad Mini', 'IPADMINI', 'Apple', 2);
-INSERT INTO product (name, code, brand, category_id) VALUES
-  ('iPad Pro', 'IPADPRO', 'Apple', 2);
+INSERT INTO supplier (id, name, code, address, email, phone_number) VALUES
+(1, 'FPT Mobile', 'FPTM', '1A Tran Nhan Tong', 'fptmobile@fpt.com.vn', '+84909090909');
+INSERT INTO supplier (id, name, code, address, email, phone_number) VALUES
+(2, 'Nguyen Kim', 'NKIM', '25 Tran Hung Dao', 'sales@nguyenkim.com.vn', '+8491111111');
+
+INSERT INTO product (name, code, brand, category_id, supplier_id) VALUES
+  ('MacBook Pro 2020', 'MACPRO2020', 'Apple', 1, 1);
+INSERT INTO product (name, code, brand, category_id, supplier_id) VALUES
+  ('MacBook Air 2018', 'MACAIR2018', 'Apple', 1, 1);
+INSERT INTO product (name, code, brand, category_id, supplier_id) VALUES
+  ('iPad Mini', 'IPADMINI', 'Apple', 2, 2);
+INSERT INTO product (name, code, brand, category_id, supplier_id) VALUES
+  ('iPad Pro', 'IPADPRO', 'Apple', 2, 2);
 
 INSERT INTO sku (code, product_id, color, size, price) VALUES
 ('MACPRO2020-1', 1, 'Silver', '13inch', 999.90);

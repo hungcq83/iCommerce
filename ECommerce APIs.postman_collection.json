@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/api/products/1",
+					"raw": "http://localhost:8090/api/products/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -72,7 +72,7 @@
 					"path": [
 						"api",
 						"products",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -85,7 +85,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8090/api/products?q=a&sortBy=category.name&order=desc&filter=brand:apple",
+					"raw": "http://localhost:8090/api/products?q=a&sortBy=category.name&order=asc&filter=brand:apple",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -106,7 +106,7 @@
 						},
 						{
 							"key": "order",
-							"value": "desc"
+							"value": "asc"
 						},
 						{
 							"key": "filter",
@@ -168,7 +168,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"test\",\n\t\"code\": \"TEST1\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\",\n\t\"categoryId\": 2\n}"
+					"raw": "{\n\t\"name\": \"test\",\n\t\"code\": \"TEST1\",\n\t\"price\": 12.90,\n\t\"brand\": \"Test Brand\",\n\t\"color\": \"Red\",\n\t\"categoryId\": 2,\n\t\"supplierId\": 1\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8090/api/products",
@@ -236,6 +236,57 @@
 							"key": "category",
 							"value": "laptop"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order API - Get Order By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8090/api/orders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order API - Create Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"orderStatus\": \"Ordered\",\n    \"orderedDate\": \"2020-08-03T12:46:19.389+00:00\",\n    \"orderTotal\": 999.8,\n    \"orderItems\": [\n        {\n    \n            \"name\": \"iPad Mini 2018\",\n            \"code\": \"IPADMINI2018-1\",\n            \"brand\": \"Apple\",\n            \"price\": 499.9,\n            \"color\": \"White\",\n            \"size\": \"Mini\"\n        }\n    ],\n    \"shipment\": {\n        \n        \"shipmentCode\": \"FEDEX111111\",\n        \"shipmentMethod\": \"FEDEX Express\",\n        \"shippingCharge\": 20.9,\n        \"shippingAddress\": \"110 Nguyen Thi Thap, District 2, HCMC\"\n    },\n    \"payment\": {\n        \n        \"code\": \"VISAPA0009\",\n        \"amount\": 9998.8,\n        \"cardNumber\": \"400000111199999\",\n        \"cardType\": \"VISA\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"orders"
 					]
 				}
 			},

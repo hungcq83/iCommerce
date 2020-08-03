@@ -24,7 +24,7 @@ This is a POC of iCommerce backend services. ERD files and Architecture Diagram 
 ### Backend
 - An API GW that acts as a single entry point for all requests from Frontend. API GW responsible for authenticate/authorize the requests before routing them to corresponding microservices.
 - Service Discovery - for service register and discovery, provides an abstract way for service-to-service communication
-- A set of microservices: Product, Audit, Cart and Order. Cart and Order services not yet implemented. 
+- A set of microservices: Product, Audit, Cart (not yet implemented) and Order. 
 ### Authentication and Authorization
 - OAuth2 Authorization Server (not yet implemented) - Centralized Authorization server to validate users credentials, generate & validate access token
 - User authentication & authorization: Use OAuth2 Authorization Code flow with PKCE for enhanced security since our Frontend is SPA. Traditional webapp can use Authorization Code flow (without PCKE).
@@ -46,6 +46,7 @@ Audit DB
 - Discovery Server - Netflix Eureka
 - Product Service (supports Get, Search, Sort, Filter, Pagination, Create and Update)
 - Audit Service (supports Get & Create)
+- Order Service (supports Get & Create)
 
 ### Notable dependencies
 - Lombok - avoid repetitive code
@@ -107,16 +108,16 @@ curl -X GET \
 Search Products with filters
 ```sh
 curl -X GET \
-  'http://localhost:8090/api/products?q=a&sortBy=category.name&order=desc&filter=brand:apple' \
+  'http://localhost:8090/api/products?q=a&sortBy=category.name&order=asc&filter=brand:apple' \
   -H 'Cache-Control: no-cache' \
-  -H 'Postman-Token: 64775f49-e7f8-47c7-99e3-ef4a47517509'
+  -H 'Postman-Token: bb4e05f8-dc16-42ae-8c7b-8e06ff8c136c'
 ```
 Search Products without filters
 ```sh
 curl -X GET \
   'http://localhost:8090/api/products?q=a&sortBy=code&order=desc&page=0' \
   -H 'Cache-Control: no-cache' \
-  -H 'Postman-Token: 5b691596-5142-44c8-b464-b069c06300dd'
+  -H 'Postman-Token: f398ec61-b8e2-41fc-bfa5-30ec244cf8a4'
 ```
 Create Product
 ```sh
@@ -124,14 +125,15 @@ curl -X POST \
   http://localhost:8090/api/products \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: cc3f8bc1-25d1-4a67-bcd5-28e229129061' \
+  -H 'Postman-Token: d2d9c563-e387-43a4-8754-d50f1d49ed73' \
   -d '{
 	"name": "test",
 	"code": "TEST1",
 	"price": 12.90,
 	"brand": "Test Brand",
 	"color": "Red",
-	"categoryId": 2
+	"categoryId": 2,
+	"supplierId": 1
 }'
 ```
 Update Product
@@ -140,7 +142,7 @@ curl -X PUT \
   http://localhost:8090/api/products \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 5a8b6542-c333-417c-927d-67f1683d88e5' \
+  -H 'Postman-Token: 7d1d236f-6268-41cd-8a1b-caa3e13532f9' \
   -d '{
 	"id": 5,
 	"name": "testNew3",
@@ -148,7 +150,8 @@ curl -X PUT \
 	"price": 12.90,
 	"brand": "Test Brand",
 	"color": "Red",
-	"categoryId": 1
+	"categoryId": 1,
+	"supplierId": 1
 }'
 ```
 Get Products by category code
@@ -156,6 +159,49 @@ Get Products by category code
 curl -X GET \
   'http://localhost:8090/api/products?category=laptop' \
   -H 'Cache-Control: no-cache' \
-  -H 'Postman-Token: afe60449-7d26-478d-97aa-33ac02877670'
+  -H 'Postman-Token: 92c00118-e1a3-40b2-87c4-9bd1ade8e3df'
 ```
 
+### Order API
+Get Order by ID
+```sh
+curl -X GET \
+  http://localhost:8090/api/orders/1 \
+  -H 'Cache-Control: no-cache' \
+  -H 'Postman-Token: 5bc748b9-2ada-43ea-ab97-b21e08f7efd2'
+```
+Create Order
+```sh
+curl -X POST \
+  http://localhost:8090/api/orders \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: a55ce0ad-28ea-41cb-857a-c28e42875087' \
+  -d '{
+    "orderStatus": "Ordered",
+    "orderedDate": "2020-08-03T12:46:19.389+00:00",
+    "orderTotal": 999.8,
+    "orderItems": [
+        {
+            "name": "iPad Mini 2018",
+            "code": "IPADMINI2018-1",
+            "brand": "Apple",
+            "price": 499.9,
+            "color": "White",
+            "size": "Mini"
+        }
+    ],
+    "shipment": {
+        "shipmentCode": "FEDEX111111",
+        "shipmentMethod": "FEDEX Express",
+        "shippingCharge": 20.9,
+        "shippingAddress": "110 Nguyen Thi Thap, District 2, HCMC"
+    },
+    "payment": {
+        "code": "VISAPA0009",
+        "amount": 9998.8,
+        "cardNumber": "400000111199999",
+        "cardType": "VISA"
+    }
+}'
+```

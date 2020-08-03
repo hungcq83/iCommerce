@@ -16,6 +16,10 @@ zuul:
       path: /audits/**
       stripPrefix: false
       serviceId: audit-service
+    orders:
+      path: /orders/**
+      stripPrefix: false
+      serviceId: order-service
 
 eureka:
   client:

@@ -40,4 +40,6 @@ public class ProductDTO {
     @JsonProperty("category")
     private String categoryName;
 
+    private Long supplierId;
+
 }

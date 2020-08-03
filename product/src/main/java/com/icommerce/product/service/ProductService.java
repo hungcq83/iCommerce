@@ -2,10 +2,12 @@ package com.icommerce.product.service;
 
 import com.icommerce.product.entity.ProductEntity;
 import com.icommerce.product.entity.SkuEntity;
+import com.icommerce.product.entity.SupplierEntity;
 import com.icommerce.product.model.request.ProductDTO;
 import com.icommerce.product.model.request.SkuDTO;
 import com.icommerce.product.repository.ProductRepository;
 import com.icommerce.product.repository.SkuRepository;
+import com.icommerce.product.repository.SupplierRepository;
 import com.icommerce.product.specification.ProductSpecifications;
 import com.netflix.discovery.converters.Auto;
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +47,9 @@ public class ProductService {
     private SkuRepository skuRepository;
 
     @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
     private AuditService auditService;
 
     @Autowired
@@ -56,6 +61,8 @@ public class ProductService {
     @Transactional
     public long createProduct(ProductDTO productDTO) {
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
+        SupplierEntity supplierEntity = supplierRepository.findById(productDTO.getSupplierId()).get();
+        productEntity.setSupplier(supplierEntity);
         productRepository.save(productEntity);
 
         log.info("Successfully saved new product entity with id: {}", productEntity.getId());
@@ -111,6 +118,8 @@ public class ProductService {
     @Transactional
     public long updateProduct(ProductDTO productDTO) {
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
+        SupplierEntity supplierEntity = supplierRepository.findById(productDTO.getSupplierId()).get();
+        productEntity.setSupplier(supplierEntity);
         productRepository.save(productEntity);
 
         log.info("Successfully save/update product with ID: {}", productEntity.getId());
